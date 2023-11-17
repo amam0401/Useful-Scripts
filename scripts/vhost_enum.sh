@@ -12,7 +12,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 TMP_FILE="/tmp/gobuster_output_$((RANDOM % (10000000000 - 1000000000 + 1) + 1000000000))"
-gobuster vhost --url $1 --append-domain -w $2 -k --no-error 2>&1 | tee $TMP_FILE
+gobuster vhost --url $1 --append-domain -w $2 -k --no-error -t 60 2>&1 | tee $TMP_FILE
 
 domain=$(echo "$1" | awk -F[/:] '{print $4}')
 subdomains=$(strings $TMP_FILE | grep 'Found' | cut -d ' ' -f 2 | tr '\n' ',')
