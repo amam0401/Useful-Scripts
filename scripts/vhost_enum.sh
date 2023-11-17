@@ -24,7 +24,7 @@ read answer
 if [ "$answer" == "yes" ]; then
     echo -e "${YELLOW}Enter the target IP : ${NC}\c"
     read input_ip
-    sudo ./add_host.sh $input_ip $subdomains
+    sudo add_host.sh $input_ip $subdomains
     rm $TMP_FILE
 elif [ "$answer" == "no" ]; then
     rm $TMP_FILE
