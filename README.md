@@ -2,7 +2,7 @@
 A bunch of useful scripts to automate the boring stuff while doing a ctf machine.
 
 # Usage
-All details are covered [here](URL).
+All details are covered [here](https://cybersecfun.pythonanywhere.com/other/useful-scripts.html).
 But to spawn the quick usage guide run the script without arguments.
 
 # NOTES
